@@ -1,0 +1,244 @@
+.host-cta {
+  padding: 100px 0;
+  background: var(--color-white);
+}
+
+.host-cta__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.host-cta__perks {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 32px 0 36px;
+}
+
+.host-cta__perks li {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.host-cta__perk-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.host-cta__perks li > div strong {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 4px;
+}
+
+.host-cta__perks li > div p {
+  font-size: 0.88rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+.host-cta__actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.host-cta__learn {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  transition: color var(--transition);
+}
+
+.host-cta__learn:hover {
+  color: var(--color-primary-dark);
+}
+
+/* Earnings card */
+.host-earnings-card {
+  background: var(--color-bg);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  border: 1.5px solid var(--color-border);
+  box-shadow: var(--shadow-md);
+}
+
+.host-earnings-card__header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.host-earnings-card__avatar {
+  width: 48px;
+  height: 48px;
+  background: var(--color-bg-alt);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.host-earnings-card__header strong {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.host-earnings-card__header p {
+  font-size: 0.8rem;
+  color: var(--color-primary-light);
+  font-weight: 600;
+}
+
+.host-earnings-card__stat-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.host-earnings-card__stat {
+  background: var(--color-white);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  border: 1px solid var(--color-border);
+}
+
+.host-earnings-card__stat span {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  margin-bottom: 4px;
+}
+
+.host-earnings-card__stat strong {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--color-text);
+  letter-spacing: -0.02em;
+}
+
+.host-earnings-card__bar-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.host-earnings-card__bar-label strong {
+  color: var(--color-primary);
+  font-size: 0.9rem;
+}
+
+.host-earnings-card__bar {
+  background: var(--color-border);
+  border-radius: var(--radius-full);
+  height: 8px;
+  margin-bottom: 20px;
+}
+
+.host-earnings-card__bar-fill {
+  background: linear-gradient(90deg, var(--color-primary-light), var(--color-primary));
+  height: 100%;
+  border-radius: var(--radius-full);
+}
+
+.host-earnings-card__reviews {
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+  margin-bottom: 20px;
+}
+
+.host-earnings-card__superhost {
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.host-earnings-card__fee-compare {
+  border-top: 1px solid var(--color-border);
+  padding-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.host-earnings-card__fee {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+}
+
+.host-earnings-card__fee--them {
+  background: #fff5f5;
+  color: #c0392b;
+}
+
+.host-earnings-card__fee--them span { color: #e74c3c; }
+.host-earnings-card__fee--them strong { color: #c0392b; font-weight: 700; }
+
+.host-earnings-card__fee--us {
+  background: #f0faf4;
+  color: var(--color-primary-dark);
+}
+
+.host-earnings-card__fee--us span { color: var(--color-primary); }
+.host-earnings-card__fee--us strong { color: var(--color-primary-dark); font-weight: 700; }
+
+.host-earnings-card__fee-saving {
+  background: var(--color-primary);
+  color: white;
+  text-align: center;
+  padding: 10px;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+@media (max-width: 1024px) {
+  .host-cta__grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+}
+
+@media (max-width: 640px) {
+  .host-cta {
+    padding: 72px 0;
+  }
+
+  .host-cta__grid {
+    gap: 40px;
+  }
+
+  .host-earnings-card {
+    padding: 24px;
+  }
+}
