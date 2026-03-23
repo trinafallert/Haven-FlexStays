@@ -25,7 +25,19 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Get Cloudflare Account ID
+        id: cf_account
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          ACCOUNT_ID=$(curl -s -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+            "https://api.cloudflare.com/client/v4/accounts" | \
+            python3 -c "import sys,json; accts=json.load(sys.stdin).get('result',[]); print(accts[0]['id'] if accts else '')")
+          echo "account_id=$ACCOUNT_ID" >> $GITHUB_OUTPUT
+          echo "Found account: $ACCOUNT_ID"
+
       - name: Deploy to Cloudflare Pages
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ steps.cf_account.outputs.account_id }}
         run: npx wrangler pages deploy dist --project-name=haven-flexstays --branch=main --commit-dirty=true
