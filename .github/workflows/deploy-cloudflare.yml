@@ -30,11 +30,33 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         run: |
-          ACCOUNT_ID=$(curl -s -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
-            "https://api.cloudflare.com/client/v4/accounts" | \
-            python3 -c "import sys,json; accts=json.load(sys.stdin).get('result',[]); print(accts[0]['id'] if accts else '')")
+          RESPONSE=$(curl -s -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+            "https://api.cloudflare.com/client/v4/accounts")
+          echo "CF API response: $RESPONSE"
+          ACCOUNT_ID=$(echo "$RESPONSE" | python3 -c "import sys,json; accts=json.load(sys.stdin).get('result',[]); print(accts[0]['id'] if accts else '')")
           echo "account_id=$ACCOUNT_ID" >> $GITHUB_OUTPUT
           echo "Found account: $ACCOUNT_ID"
+
+      - name: Create Pages Project (if not exists)
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          ACCOUNT_ID: ${{ steps.cf_account.outputs.account_id }}
+        run: |
+          # Check if project exists
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+            -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+            "https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/pages/projects/haven-flexstays")
+          echo "Project check status: $STATUS"
+          if [ "$STATUS" != "200" ]; then
+            echo "Creating project..."
+            curl -s -X POST \
+              -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+              -H "Content-Type: application/json" \
+              "https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/pages/projects" \
+              -d '{"name":"haven-flexstays","production_branch":"main"}'
+          else
+            echo "Project already exists"
+          fi
 
       - name: Deploy to Cloudflare Pages
         env:
